@@ -11,15 +11,15 @@ const CampgroundSchema = new Schema({
   reviews: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Review'
-    }
-  ]
+      ref: 'Review',
+    },
+  ],
 });
 
-CampgroundSchema.post('findOneAndDelete', async (campground) => {
+CampgroundSchema.post('findOneAndDelete', async campground => {
   if (campground) {
-    await Review.deleteMany({ _id: { $in: campground.reviews } })
+    await Review.deleteMany({ _id: { $in: campground.reviews } });
   }
-})
+});
 
 module.exports = mongoose.model('Campground', CampgroundSchema);

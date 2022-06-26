@@ -17,9 +17,9 @@ const reviewRoutes = require('./routes/reviews');
 mongoose.connect('mongodb://localhost:27017/yelp-camp');
 
 const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", () => {
-  console.log("Database connected");
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+  console.log('Database connected');
 });
 
 const app = express();
@@ -39,9 +39,9 @@ const sessionConfig = {
   cookie: {
     httpOnly: true,
     expires: Date.now() + 1000 * 3600 * 24 * 7,
-    maxAge: 1000 * 3600 * 24 * 7
-  }
-}
+    maxAge: 1000 * 3600 * 24 * 7,
+  },
+};
 app.use(session(sessionConfig));
 app.use(flash());
 
@@ -57,7 +57,7 @@ app.use((req, res, next) => {
   res.locals.error = req.flash('error');
   res.locals.currentUser = req.user;
   next();
-})
+});
 
 app.use('/', userRoutes);
 app.use('/campgrounds', campgroundRoutes);
@@ -65,18 +65,18 @@ app.use('/campgrounds/:id/reviews', reviewRoutes);
 
 app.get('/', (req, res) => {
   res.render('home');
-})
+});
 
 app.all('*', (req, res, next) => {
-  throw new ExpressError('Page Not Found', 404)
-})
+  throw new ExpressError('Page Not Found', 404);
+});
 
 app.use((err, req, res, next) => {
   const { statusCode = 500 } = err;
   if (!err.message) err.message = 'Something Went Wrong';
   res.status(statusCode).render('error', { err });
-})
+});
 
 app.listen(3000, () => {
-  console.log("Serving on port 3000");
-})
+  console.log('Serving on port 3000');
+});

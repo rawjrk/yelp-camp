@@ -1,0 +1,20 @@
+{
+  "env": {
+      "browser": true,
+      "commonjs": true,
+      "es2021": true,
+      "node": true
+  },
+  "extends": ["eslint:recommended", "google"],
+  "parserOptions": {
+      "ecmaVersion": "latest"
+  },
+  "rules": {
+      "linebreak-style": ["error", "windows"],
+      "object-curly-spacing": ["error", "always"],
+      "arrow-parens": ["error", "as-needed"],
+      "no-unused-vars": ["warn"],
+      "new-cap": ["warn"],
+      "require-jsdoc": ["off"]
+  }
+}
