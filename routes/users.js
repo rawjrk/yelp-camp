@@ -3,18 +3,15 @@ const router = express.Router({ mergeParams: true });
 const passport = require('passport');
 const users = require('../controllers/users');
 
-router.get('/register', users.renderRegisterForm);
+router.route('/register')
+    .get(users.renderRegisterForm)
+    .post(users.registerUser);
 
-router.post('/register', users.registerUser);
-
-router.get('/login', users.renderLoginForm);
-
-router.post('/login',
-    passport.authenticate('local', {
-      failureFlash: true,
-      failureRedirect: '/login',
-    }),
-    users.loginSuccessfull);
+const authConfig = { failureFlash: true, failureRedirect: '/login' };
+router.route('/login')
+    .get(users.renderLoginForm)
+    .post(passport.authenticate('local', authConfig),
+        users.loginSuccessfull);
 
 router.get('/logout', users.logoutUser);
 
