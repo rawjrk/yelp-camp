@@ -7,12 +7,12 @@ module.exports.campgroundSchema = Joi.object({
     image: Joi.string().required(),
     price: Joi.number().required().greater(0),
     description: Joi.string().required(),
-  }).required()
+  }).required(),
 });
 
 module.exports.reviewSchema = Joi.object({
   review: Joi.object({
     body: Joi.string().required(),
-    rating: Joi.number().min(1).max(5).required()
-  }).required()
-})
+    rating: Joi.number().min(1).max(5).required(),
+  }).required(),
+});
