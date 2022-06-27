@@ -1,6 +1,6 @@
 const ExpressError = require('./utils/ExpressError');
-const Campground = require('./models/campground');
-const Review = require('./models/review');
+const Campground = require('./models/campgrounds');
+const Review = require('./models/reviews');
 const { campgroundSchema, reviewSchema } = require('./schemas');
 
 module.exports.isLoggedIn = (req, res, next) => {

@@ -1,5 +1,5 @@
 const catchAsync = require('../utils/catchAsync');
-const User = require('../models/user');
+const User = require('../models/users');
 
 module.exports.renderRegisterForm = (req, res) => {
   res.render('users/register');

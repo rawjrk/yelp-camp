@@ -1,6 +1,6 @@
 const catchAsync = require('../utils/catchAsync');
 const { cloudinary } = require('../cloudinary');
-const Campground = require('../models/campground');
+const Campground = require('../models/campgrounds');
 
 module.exports.index = catchAsync(async (req, res) => {
   const campgrounds = await Campground.find({});
