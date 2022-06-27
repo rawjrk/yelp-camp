@@ -1,6 +1,6 @@
 const catchAsync = require('../utils/catchAsync');
-const Campground = require('../models/campground');
-const Review = require('../models/review');
+const Campground = require('../models/campgrounds');
+const Review = require('../models/reviews');
 
 module.exports.createReview = catchAsync(async (req, res) => {
   const campground = await Campground.findById(req.params.id);
