@@ -7,10 +7,12 @@ const map = new mapboxgl.Map({
   projection: 'equirectangular',
 });
 
+map.addControl(new mapboxgl.NavigationControl());
+
 const markerPopup = new mapboxgl.Popup({ offset: 30 })
     .setHTML(campground.properties.popUpMarkupNoLink);
 
-const marker = new mapboxgl.Marker()
+new mapboxgl.Marker()
     .setLngLat(campground.geometry.coordinates)
     .setPopup(markerPopup)
     .addTo(map);
