@@ -1,9 +1,6 @@
 <% layout('layouts/boilerplate') %>
 <div class="row">
-  <div class="col-6 offset-3">
-
-    <div id="map"></div>
-    
+  <div class="col-6">  
     <div class="card mb-3">
       <div id="campgroundCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -44,12 +41,14 @@
         Submitted by <u><%= campground.author.username %></u>
       </div>
     </div>
+  </div>
+  <div class="col-6">
+    <div id="map" class="mb-3"></div>
     <% if (currentUser) { %>
-    <h2>Leave a Review</h2>
+    <h2>Leave Your Review</h2>
     <form action="/campgrounds/<%= campground._id %>/reviews" method="POST" class="mb-3 needs-validation" novalidate>
-      <div class="mb-3">
+      <div>
         <fieldset class="starability-grow">
-          <legend>Rating:</legend>
           <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
           <input type="radio" id="first-rate1" name="review[rating]" value="1" />
           <label for="first-rate1" title="Terrible">1 star</label>
@@ -64,7 +63,7 @@
         </fieldset>
       </div>
       <div class="mb-3">
-        <label class="form-label" for="body">Review</label>
+        <label class="form-label" for="body">Review Text</label>
         <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3" required></textarea>
         <div class="valid-feedback">
           Looks good!
@@ -73,7 +72,7 @@
       <button class="btn btn-success">Submit</button>
     </form>
     <% } %>
-    <h2>Reviews</h2>
+    <h2>Submitted Reviews</h2>
     <% for (let review of campground.reviews) { %>
       <div class="card mb-3">
         <div class="card-body">
