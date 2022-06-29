@@ -20,7 +20,10 @@ const userRoutes = require('./routes/users');
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
 
-mongoose.connect('mongodb://localhost:27017/yelp-camp');
+const MongoStore = require('connect-mongo');
+
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost:27017/yelp-camp';
+mongoose.connect(mongoUrl);
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -39,16 +42,28 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(mongoSanitize());
 
+const store = MongoStore.create({
+  mongoUrl,
+  touchAfter: 24 * 3600,
+});
+
+store.on('error', function(err) {
+  console.log('Session Store Error', err);
+});
+
+const secret = process.env.SECRET || 'fsafhaha';
+
 const sessionConfig = {
-  name: '_ses_',
-  secret: 'fsafhaha',
+  store,
+  name: 'session',
+  secret,
   resave: false,
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
     // secure: true,
-    expires: Date.now() + 1000 * 3600 * 24 * 7,
-    maxAge: 1000 * 3600 * 24 * 7,
+    expires: Date.now() + 7 * 24 * 3600 * 1000,
+    maxAge: 7 * 24 * 3600 * 1000,
   },
 };
 app.use(session(sessionConfig));
@@ -133,6 +148,7 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render('error', { err });
 });
 
-app.listen(3000, () => {
-  console.log('Serving on port 3000');
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Serving on port ${port}`);
 });
