@@ -9,13 +9,8 @@ const map = new mapboxgl.Map({
 map.addControl(new mapboxgl.NavigationControl());
 
 map.on('load', () => {
-  // Add a new source from our GeoJSON data and
-  // set the 'cluster' option to true. GL-JS will
-  // add the point_count property to your source data.
   map.addSource('campgrounds', {
     type: 'geojson',
-    // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
-    // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
     data: campgrounds,
     cluster: true,
     clusterMaxZoom: 14, // Max zoom to cluster points on
@@ -30,17 +25,20 @@ map.on('load', () => {
     paint: {
       // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
       // with three steps to implement three types of circles:
-      //   * Blue, 20px circles when point count is less than 100
-      //   * Yellow, 30px circles when point count is between 100 and 750
-      //   * Pink, 40px circles when point count is greater than or equal to 750
       'circle-color': [
         'step',
         ['get', 'point_count'],
-        '#00BCD4',
+        '#CDDC39',
         10,
-        '#2196F3',
+        '#FFEB3B',
         20,
-        '#3F51B5',
+        '#FFCA28',
+        40,
+        '#FFA726',
+        60,
+        '#FF9800',
+        100,
+        '#FF5722',
       ],
       'circle-radius': [
         'step',
@@ -48,8 +46,14 @@ map.on('load', () => {
         15,
         10,
         20,
-        30,
+        20,
         25,
+        40,
+        30,
+        70,
+        35,
+        100,
+        40,
       ],
     },
   });
@@ -72,14 +76,11 @@ map.on('load', () => {
     source: 'campgrounds',
     filter: ['!', ['has', 'point_count']],
     paint: {
-      'circle-color': '#11b4da',
-      'circle-radius': 4,
-      'circle-stroke-width': 1,
-      'circle-stroke-color': '#fff',
+      'circle-color': '#66BB6A',
+      'circle-radius': 6,
     },
   });
 
-  // inspect a cluster on click
   map.on('click', 'clusters', e => {
     const features = map.queryRenderedFeatures(e.point, {
       layers: ['clusters'],
@@ -98,17 +99,10 @@ map.on('load', () => {
     );
   });
 
-  // When a click event occurs on a feature in
-  // the unclustered-point layer, open a popup at
-  // the location of the feature, with
-  // description HTML from its properties.
   map.on('click', 'unclustered-point', e => {
     const coordinates = e.features[0].geometry.coordinates.slice();
     const { popUpMarkup } = e.features[0].properties;
 
-    // Ensure that if the map is zoomed out such that
-    // multiple copies of the feature are visible, the
-    // popup appears over the copy being pointed to.
     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
     }
@@ -119,10 +113,11 @@ map.on('load', () => {
         .addTo(map);
   });
 
-  map.on('mouseenter', 'clusters', () => {
+  map.on('mouseenter', ['clusters', 'unclustered-point'], () => {
     map.getCanvas().style.cursor = 'pointer';
   });
-  map.on('mouseleave', 'clusters', () => {
+  map.on('mouseleave', ['clusters', 'unclustered-point'], () => {
     map.getCanvas().style.cursor = '';
   });
+  
 });
