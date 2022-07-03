@@ -1,0 +1,25 @@
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+<% if (isFormRenderPage) { %>
+  <script src="/javascripts/formValidation.js"></script>
+<% } %>
+
+<% if (!isFormRenderPage) { %>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js" crossorigin="anonymous"></script>
+<% } %>
+
+<% if (isIndexPage) { %>
+  <script>
+    const mapboxToken = '<%- process.env.MAPBOX_TOKEN %>';
+    const campgrounds = <%- JSON.stringify({ features: campgrounds }) %>
+  </script>
+  <script src="/javascripts/clusterMapRender.js"></script>
+<% } %>
+
+<% if (isShowPage) { %>
+  <script>
+    const mapboxToken = '<%- process.env.MAPBOX_TOKEN %>';
+    const campground = <%- JSON.stringify(campground) %>;
+  </script>
+  <script src="/javascripts/showPageMapRender.js"></script>
+<% } %>

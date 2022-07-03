@@ -22,7 +22,8 @@ const reviewRoutes = require('./routes/reviews');
 
 const MongoStore = require('connect-mongo');
 
-const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost:27017/yelp-camp';
+// const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost:27017/yelp-camp';
+const mongoUrl = 'mongodb://localhost:27017/yelp-camp';
 mongoose.connect(mongoUrl);
 
 const db = mongoose.connection;
@@ -127,6 +128,11 @@ app.use((req, res, next) => {
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
   res.locals.currentUser = req.user;
+  res.locals.isIndexPage = req.path === '/campgrounds';
+  res.locals.isFormRenderPage = req.path.includes('/edit') ||
+      ['/login', '/register', '/campgrounds/new'].includes(req.path);
+  res.locals.isShowPage = !(res.locals.isIndexPage || res.locals.isFormRenderPage);
+  res.locals.currentPath = req.path;
   next();
 });
 
