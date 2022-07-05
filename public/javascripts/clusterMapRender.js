@@ -2,9 +2,8 @@ mapboxgl.accessToken = mapboxToken;
 const map = new mapboxgl.Map({
   container: 'cluster-map',
   style: 'mapbox://styles/mapbox/light-v10',
-  // center: [-103.5917, 40.6699],
-  center: [9.0699, 57.9558],
-  zoom: 2.2,
+  center: [9.0699, 56.9558],
+  zoom: 2.1,
 });
 
 map.addControl(new mapboxgl.NavigationControl());
@@ -14,8 +13,8 @@ map.on('load', () => {
     type: 'geojson',
     data: campgrounds,
     cluster: true,
-    clusterMaxZoom: 14, // Max zoom to cluster points on
-    clusterRadius: 50, // Radius of each cluster when clustering points (defaults to 50)
+    clusterMaxZoom: 14,
+    clusterRadius: 50,
   });
 
   map.addLayer({
@@ -24,8 +23,6 @@ map.on('load', () => {
     source: 'campgrounds',
     filter: ['has', 'point_count'],
     paint: {
-      // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
-      // with three steps to implement three types of circles:
       'circle-color': [
         'step',
         ['get', 'point_count'],
