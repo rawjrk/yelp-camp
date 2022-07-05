@@ -15,7 +15,6 @@ const schemaConfig = { toJSON: { virtuals: true } };
 
 const CampgroundSchema = new Schema({
   title: String,
-  images: [ImageSchema],
   location: String,
   geometry: {
     type: {
@@ -30,6 +29,7 @@ const CampgroundSchema = new Schema({
   },
   price: Number,
   description: String,
+  images: [ImageSchema],
   author: {
     type: Schema.Types.ObjectId,
     ref: 'User',
