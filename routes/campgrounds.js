@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { validateCampground, isLoggedIn, isAuthor } = require('../middleware');
+const { validateCampground, isLoggedIn, isAuthor } = require('../utils/middleware');
 const campgrounds = require('../controllers/campgrounds');
 
 const multer = require('multer');

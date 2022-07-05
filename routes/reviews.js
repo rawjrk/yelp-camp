@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
-const { validateReview, isLoggedIn, isReviewAuthor } = require('../middleware');
+const { validateReview, isLoggedIn, isReviewAuthor } = require('../utils/middleware');
 const reviews = require('../controllers/reviews');
 
 router.post('/',
