@@ -1,10 +1,12 @@
 {
   "name": "yelp-camp",
   "version": "1.0.0",
-  "description": "Course Project",
-  "main": "index.js",
+  "description": "The Course Project",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
+    "seed": "node seeds",
+    "sgen": "node seeds/generate",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
