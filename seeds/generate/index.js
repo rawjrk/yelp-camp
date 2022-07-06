@@ -42,8 +42,9 @@ fs.createReadStream(initialFile)
     })
     .on('end', () => {
       writeJsonFile(results, newFile);
-      console.log(`Processed ${results.length} rows to campsites.json`);
+      console.log(`Processed ${results.length} rows to seeds/campsites.json`);
       const features = turf.points(points);
       const center = turf.center(features);
-      console.log('New cluster map center [long,lat]:', center.geometry.coordinates);
+      console.log('New cluster map center [long,lat]:',
+          center.geometry.coordinates.map(num => Math.floor(num*10000)/10000));
     });
