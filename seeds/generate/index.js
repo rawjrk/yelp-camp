@@ -4,7 +4,7 @@ const csv = require('csv-parser');
 const turf = {
   center: require('@turf/center').default,
   points: require('@turf/helpers').points,
-}
+};
 const { writeJsonFile } = require('./jsonReader');
 
 const initialFile = path.join(__dirname, 'OurBumble-DB.csv');
@@ -37,7 +37,7 @@ fs.createReadStream(initialFile)
 
       if (validEntry) {
         results.push(data);
-        points.push([ data.longitude, data.latitude ]);
+        points.push([data.longitude, data.latitude]);
       }
     })
     .on('end', () => {
