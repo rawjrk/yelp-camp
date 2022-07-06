@@ -2,7 +2,12 @@ const mongoose = require('mongoose');
 const Campground = require('../models/campgrounds');
 const campsites = require('./campsites.json');
 
-mongoose.connect('mongodb://localhost:27017/yelp-camp');
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost:27017/yelp-camp';
+mongoose.connect(mongoUrl);
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -35,7 +40,7 @@ const seedDB = async () => {
           filename: 'YelpCamp/kaueras6rkazbw5aekxq',
         },
       ],
-      author: '62b836dd48c555916faa42a5',
+      author: '62c572f1848c8459caebafac',
     });
     await campground.save();
   }
