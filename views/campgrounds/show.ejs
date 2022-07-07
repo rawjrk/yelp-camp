@@ -63,10 +63,9 @@
         </fieldset>
       </div>
       <div class="mb-3">
-        <label class="form-label" for="body">Review Text</label>
-        <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3" required></textarea>
+        <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3" placeholder="Tell us what you think about this campground..." required></textarea>
         <div class="valid-feedback">Looks good!</div>
-        <div class="invalid-feedback">Please, provide us with at least a short note about your experience.</div>
+        <div class="invalid-feedback">Please, provide us at least a short note about your experience.</div>
       </div>
       <button class="btn btn-success">Submit</button>
     </form>
@@ -76,9 +75,9 @@
       <div class="card mb-3">
         <div class="card-body">
           <h5 class="card-title"><%= review.author.username %></h5>
-          <p class="starability-result" data-rating="<%= review.rating %>">
+          <div class="starability-result" data-rating="<%= review.rating %>">
             Rated: <%= review.rating %> stars
-          </p>
+          </div>
           <p class="card-text"><%= review.body %></p>
           <% if (currentUser && review.author.equals(currentUser._id)) { %>
           <form action="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">

@@ -11,7 +11,7 @@
   <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="mb-auto">
       <div>
-        <h3 class="float-md-start mb-0">YelpCamp <span class="badge bg-dark">EU</span></h3>
+        <h3 class="float-md-start mb-0">YelpCamp <span class="badge bg-success">EU</span></h3>
         <nav class="nav nav-masthead justify-content-center float-md-end">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
           <% if (!currentUser) { %>
@@ -30,7 +30,21 @@
         Jump right in and explore our many campgrounds. <br>
         Feel free to share some of your own and comment on others!
       </p>
-      <a href="/campgrounds" class="btn btn-lg btn-secondary fw-bold border-white bg-white">View Campgrounds</a>
+      <a class="btn btn-lg btn-outline-success fw-bold mx-1 mb-3" href="/campgrounds">Campgrounds</a>
+      <a class="btn btn-lg btn-outline-danger fw-bold mx-1 mb-3" data-bs-toggle="collapse" href="#collapseDisclaimer" role="button" aria-expanded="false" aria-controls="collapseDisclaimer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+          <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+        </svg>
+        Disclaimer
+      </a>
+      <div class="collapse opacity-75 my-3" id="collapseDisclaimer">
+        * This project was based on some real data.
+        Although, <mark>data may be irrelevant or out-dated</mark> (or incomplete).
+        The main goal was to implement some features for learning purposes.
+        Please, consider using another recourse if you are struggling to find a campground.
+        <hr>
+        Find more details at <a id="github-link" href="https://github.com/rawjrk/yelp-camp">Github repository</a>.
+      </div>
     </main>
 
     <footer class="mt-auto text-white-50">

@@ -30,11 +30,15 @@ body {
   border-bottom-color: white;
 }
 
-.btn-secondary, .btn-secondary:hover {
-  color: #333;
-  text-shadow: none;
+mark {
+  background-color: var(--bs-danger);
+  color: inherit;
 }
 
-.btn-secondary:focus {
-  color: #000;
+#github-link {
+  color: inherit;
+}
+
+#github-link:hover {
+  color: var(--bs-red);
 }
